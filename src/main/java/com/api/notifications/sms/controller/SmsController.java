@@ -18,7 +18,7 @@ public class SmsController {
 
     @GetMapping("/home")
     public String home() {
-        return "Microservicio de Email operativo 🚀";
+        return "Microservicio de Sms operativo 🚀";
     }
     @PostMapping("/send")
     public ResponseEntity<?> send(@RequestBody NotificationDTO notification) throws ErrorService {
