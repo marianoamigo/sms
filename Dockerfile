@@ -1,5 +1,13 @@
+# Etapa 1: build con Maven
+FROM maven:3.9.6-eclipse-temurin AS build
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
+
+# Etapa 2: correr solo el JAR
 FROM openjdk:21-slim
-COPY deploy/sms-0.0.1.jar mic_sms.jar
-EXPOSE 8083
+WORKDIR /app
+COPY --from=build /app/target/mic_sms.jar mic_sms.jar
+EXPOSE 8082
 ENTRYPOINT ["java", "-jar", "mic_sms.jar"]
 
